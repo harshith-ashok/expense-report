@@ -1,0 +1,45 @@
+.title {
+    margin: 5px;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+.ver {
+    margin: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Montserrat';
+    font-weight: normal;
+}
+.login {
+    width: 75%;
+    display: flex;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* text-align: center; */
+    /* align-items: center; */
+}
+
+.cred {
+    margin: 5px;
+    border: solid 0.3px;
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    text-align: center;
+}
+.sub {
+        margin: 5px;
+        border: none;
+        height: 30px;
+        width: 200px;
+        border-radius: 5px;
+        font-family: 'Montserrat';
+        text-align: center;
+        background-color: lightblue;
+}

@@ -1,7 +1,8 @@
 create table users
 (
     id int primary key,
-    name varchar(20) not null unique
+    name varchar(20) not null unique,
+    pwd varchar(128)
 );
 
 create table data

@@ -8,77 +8,65 @@ con = sql.connect(user='root', password='P@ssw0rd!12',host='localhost',auth_plug
 
 cur = con.cursor()
 
+cur.execute("use test;")
+# print(sub_list)
 
-# General Database creation and additional nconfig
-cur.execute("drop database if exists expense_report;")
-cur.execute("create database expense_report;")
-cur.execute("use expense_report;")
-cur.execute("create table users(user_id int primary key,name varchar(20) not null unique);")
-cur.execute("create table data(user_id int primary key,income int not null,method varchar(20) default 'cash',category varchar(30),sub_category varchar(30) default 'NA',due date,FOREIGN KEY (user_id) REFERENCES users(user_id));")
-u_id = 0
 
-def gen_id():
-    global u_id
-    u_id = random.randrange(100, 300)
-    cur.execute('select user_id from users')
-    d = cur.fetchall()
-    l = []
-    for i in range(len(d)):
-        l.append(d[i][0])
-    for j in l:
-        if u_id == j:
-            u_id = random.randrange(100, 300)
 
-gen_id()
-# Add User
 def add_user():
-    global n_id
-    due = '2006-11-11'
+
     # name
     name = input('Name of the Person (no caps): ')
+
+    # password
+    password = input('Password: ')
+
     # budget
-    budget = int(input('Annual Budget :'))
+    budget = int(input('Annual Income :'))
+
     # method
     payment = int(input('Payment Method:\n1. Cash\n2. Card \n3. Transfer\n: '))
-    # payment list
     pay = ['Cash', 'Card', 'Transfer']
-    # category
-    cat = int(input('Category:\n1. Automobile\n2. Entertainment\n3. Family\n4. Food\n5. Insurance\n6. Tax\n7. Travel\n8. Utilities\n9. Misc\n: '))
-    # category list for insertion
-    cat_list = ['Automobile',
-        'Entertainment',
-        'Family',
-        'Food',
-        'Insurance',
-        'Tax',
-        'Travel',
-        'Utilities',
-        'Misc',
-    ]
+    pay_select = pay[payment - 1]
 
-    sub_list = [
-        ['Fuel', 'Maintenance'],
-        ['Movies', 'Party', 'Concerts', 'Sports'],
-        ['Child Care','Toys', 'Others'],
-        ['Breakfast', 'Lunch', 'Dinner', 'Snacks', 'Groceries'],
-        ['Automobile','Health', 'Life'],
-        ['Property', 'Vehicle', 'Wealth', 'Other'],
-        ['Airplane', 'Bus', 'Hotel', 'Taxi', 'Other', 'Water', 'Cable', 'Electricals', 'Gas', 'Internet', 'Telephone'],
-        ['NA'],
-    ]
+    # Category
+    cur.execute('select * from categories order by cat_id;')
+    cat = cur.fetchall()
 
-    print(sub_list[cat])
-    sub_inp = int(input('Sub Category: '))
-    sub_val = sub_list[cat][sub_inp - 1]
-    print(sub_val)
+    for i in range(len(cat)):
+        print(i+1, cat[i][1], sep=' : ')
+    c = int(input('Category: '))
 
-    val_users = (u_id, name)
-    val_data = (u_id, budget, pay[payment], cat_list[cat-1], sub_val, due)
+    # Sub Category
+    cur.execute("select sub_id,sub_name from sub_categories where cat_id={id}".format(id=c))
+    sub_list = cur.fetchall()
 
-    cur.execute('insert into users values(%s, %s)', val_users)
-    cur.execute('insert into data values(%s, %s,%s, %s,%s, %s)', val_data)
+    cur.execute('select * from sub_categories;')
+    sub = cur.fetchall()
+
+    print('')
+
+    for i in range(len(sub_list)):
+        print(sub_list[i][0],sub_list[i][1],sep=' : ')
+
+    s = int(input('Sub Category: '))
+
+    # cycle
+    cyc_in = int(input('''
+Cycle:
+    1. Yealry
+    2. Monthly
+    3. Quarterly
+    4. Weekly
+: '''))
+    cyc = ['Yearly', 'Monthly', 'Quarterly', 'Weekly']
+    cyc_select = cyc[cyc_in - 1]
+
+    # TODO: Reciept
+    payee = input('Payee: ')
+
+    cur.execute("insert into users(user_id, user_name,pwd_hash) values(1,'%s','%s')" % (name,hash(password)))
+    cur.execute("insert into master(user_id,income,method,cycle,reciept,payee,cat_id,sub_id) values(1,{budget},'{pay_method}','{cycle}','nan','{payee}',{cat_id},{sub_id})".format(budget=budget, pay_method=pay_select,cycle=cyc_select,payee=payee,cat_id=c,sub_id=s))
+    print('Updated !')
     con.commit()
-
 add_user()
-
-

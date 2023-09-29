@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./home-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <title>Expense Manager | Home</title>
+  </head>
+  <body>
+    <div>
+      <p class="title">Expense Manager</p>
+    </div>
+    <div class="body">
+      <div>
+        <button class="add-entry" id="myBtn">Add New Entry</button>
+      </div>
+      <table>
+        <tr>
+          <th style="width: 5%">S No</th>
+          <th>Category</th>
+          <th>Sub category</th>
+          <th>Due</th>
+          <th>Cycle</th>
+          <th>Payee</th>
+          <th style="width: 10%">Reciept</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Automobile</td>
+          <td>Fuel</td>
+          <td>14/10/2023</td>
+          <td>Yearly</td>
+          <td>FPL Hyundai</td>
+          <td>
+            <button>
+              View <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Insurance</td>
+          <td>Health</td>
+          <td>14/10/2023</td>
+          <td>Quarterly</td>
+          <td>ICICI</td>
+          <td>
+            <button onclick="window.location.href='www.google.com';">
+              View <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div>
+            <div class="optn">
+              <label for="category">Category - </label>
+              <select name="category" id="category">
+                <option value="auto">Automobile</option>
+              </select>
+            </div>
+            <div class="optn">
+              <label for="sub-category">Sub Category - </label>
+              <select name="sub-category" id="sub-category">
+                <option value="auto">Fuel</option>
+              </select>
+            </div>
+            <div class="optn">
+              <label for="cycle">Cycle - </label>
+              <select name="cycle" id="cycle">
+                <option value="auto">Yearly</option>
+              </select>
+            </div>
+            <div class="optn">
+              <p>Payee -</p>
+              <input
+                type="text"
+                name="payee"
+                id="payee"
+                placeholder="BSNL, Shell, ACT, etc."
+              />
+            </div>
+            <div class="optn">
+              <p>Due -</p>
+              <input type="date" id="due" name="due" />
+            </div>
+            <div class="optn">
+              <form action="/action_page.php">
+                <label for="image">Reciept - </label>
+                <input type="file" id="image" name="image" />
+              </form>
+            </div>
+          </div>
+          <button type="submit">Add</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
