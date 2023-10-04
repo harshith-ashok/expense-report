@@ -1,0 +1,27 @@
+a {
+    text-decoration: none;
+    margin: 10px;
+}
+
+
+table {
+    font-family: 'Montserrat';
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(128, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.table-cont {
+    margin: 30px
+}

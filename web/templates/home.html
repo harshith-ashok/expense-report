@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block head%}
+<title>Home Page</title>
+{% endblock %} {% block body %}
+<h1>Home</h1>
+
+<form action="{{url_for('home')}}" method="post">
+  <div>
+    <p class="inp-p">Category:</p>
+    <select name="cat" id="cat">
+      {% for item in cat %}
+      <option>{{cat[item]}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <p class="inp-p">Due Date</p>
+    <input type="date" id="due" name="due" />
+  </div>
+  <div>
+    <p class="inp-p">Cycle</p>
+    <select name="cycle">
+      <option value="yearly">Yearly</option>
+      <option value="monthly">Monthly</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="weekly">Weekly</option>
+    </select>
+  </div>
+  <div>
+    <p class="inp-p">Payee</p>
+    <input type="text" name="payee" />
+  </div>
+
+  <input type="submit" value="Submit" />
+</form>
+{%endblock %}

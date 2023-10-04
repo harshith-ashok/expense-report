@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Oops!</title>
+    <style>
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+      }
+      h1 {
+        font-family: "Montserrat";
+        font-weight: 300;
+        font-size: 50px;
+        text-align: center;
+      }
+      a {
+        color: lightcoral;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <h1>Oops!</h1>
+      <p>{{val}}</p>
+      <p>
+        Wrong user name or password.
+        <a href="{{url_for('login')}}">Try again</a>
+      </p>
+    </div>
+  </body>
+</html>

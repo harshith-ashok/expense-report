@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block head%}
+<title>Dashboard</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dash.css') }}"
+/>
+{% endblock %} {% block body %}
+<h1 style="margin: 40px; text-transform: capitalize">Welcome, {{uname}}</h1>
+<h3 style="margin: 40px; font-weight: 300; margin-top: -40px">
+  Expense Manager
+  <a href="{{url_for('login')}}">Logout</a>
+</h3>
+<div class="table-cont">
+  <table>
+    <tr>
+      <th style="width: 5%">S No</th>
+      <th>Category</th>
+      <th>Sub category</th>
+      <th>Method</th>
+      <th>Cycle</th>
+      <th>Payee</th>
+      <th>Due</th>
+      <th style="width: 10%">Reciept</th>
+    </tr>
+    {% set x = -1 %}
+    <tr>
+      <td>None</td>
+      <td>
+        <button>
+          View <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>{%set x = x + 1%} {% print(x) %}</td>
+      <td>{{cat[vals[x][5]+1]}}</td>
+      <td>{{sub[vals[x][5]][2]}}</td>
+      <td>{{vals[x][2]}}</td>
+      <td>{{vals[x][3]}}</td>
+      <td>{{vals[x][4]}}</td>
+      <td>NAN</td>
+      <td>
+        <button>
+          View <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+{%endblock %}

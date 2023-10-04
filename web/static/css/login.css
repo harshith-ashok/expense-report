@@ -1,0 +1,53 @@
+.container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 10%;
+}
+
+input {
+    margin: 10px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 0.2px;
+    text-align: center;
+    font-family: 'Montserrat';
+}
+
+.submit {
+    background-color: lightcoral;
+    border-color: none;
+    color:white;
+    height: 40px;
+    border-radius: 7px;
+}
+
+.submit:hover {
+    background-color: rgb(202, 91, 91);
+}
+
+a{
+    text-decoration: none;
+    margin: 10px;
+}
+
+
+table {
+    font-family: 'Montserrat';
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(128, 0, 0, 0.2);
+}

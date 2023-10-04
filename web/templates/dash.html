@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block head%}
+<title>Dashboard</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dash.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+{% endblock %} {% block body %}
+<h1 style="margin: 40px; text-transform: capitalize">Welcome, {{uname}}</h1>
+<h3 style="margin: 40px; font-weight: 300; margin-top: -40px">
+  Expense Manager
+  <a href="{{url_for('login')}}">Logout</a>
+</h3>
+
+<div class="table-cont">
+  <table>
+    <tr>
+      <th style="width: 5%">S No</th>
+      <th>Category</th>
+      <th>Sub category</th>
+      <th>Source</th>
+      <th>Method</th>
+      <th>Cycle</th>
+      <th>Payee</th>
+      <th>Due</th>
+      <th>Payed Date</th>
+      <th style="width: 5%">Reciept</th>
+      <th style="width: 1%"></th>
+    </tr>
+    <tr>
+      {%for x in range(e_id|length)%}
+      <td>{{data[i[x]][0]}}</td>
+      <td>{{category[data[i[x]][2]][1]}}</td>
+      <td>{{sub_category[i[x]][2]}}</td>
+      <td>{{source[x][1]}}</td>
+      <td style="text-transform: capitalize">{{pay_type[x][1]}}</td>
+      <td style="text-transform: capitalize">{{cyc[x][1]}}</td>
+      <td style="text-transform: uppercase">{{data[i[x]][8]}}</td>
+      <td>{{data[i[x]][9]}}</td>
+      <td>{{data[i[x]][10]}}</td>
+      <td>
+        <button>
+          View <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+      </td>
+      <td>
+        <i class="fa-solid fa-trash-can" style="color: black; padding: 5px"></i>
+      </td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+{%endblock %}
