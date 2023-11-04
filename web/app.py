@@ -3,6 +3,7 @@ import mysql.connector as sql
 from flask import jsonify
 import random as rand
 import basehash
+import json
 
 # Intialiise
 con = sql.connect(user='root', password='P@ssw0rd!12',host='localhost',auth_plugin='mysql_native_password')
@@ -45,7 +46,10 @@ def login():
             cyc = cur.fetchall()
             cur.execute("select * from pay_type")
             pay_type = cur.fetchall()
-            return render_template('dash.html',u_id=pass_to_check[0][0],data=df, category=category,sub_category=sub_category, source=source, cyc=cyc, pay_type=pay_type,e_id=e_id,i=x)
+            cat_js =[]
+            for i in category:
+                cat_js.append(i[1])
+            return render_template('dash.html',u_id=pass_to_check[0][0],data=df, category=category,category_js=json.dumps(cat_js),sub_category=sub_category, source=source, cyc=cyc, pay_type=pay_type,e_id=e_id,i=x,uname=uname_to_check)
         else:
             return render_template('misc/401.html')
 
@@ -56,6 +60,28 @@ def dash(u_id):
     cur.execute('select * from expenses where u_id={u_id}'.format(u_id=u_id))
     df = cur.fetchall()
     return render_template('dash.html',data=df)
+
+@app.route('/add-entry',methods=['GET','POST'])
+def add_ent():
+    if request.method == 'POST':
+        u_id = request.args.get('u_id')
+        category = request.form.get('category')
+        sub_category = request.form.get('sub_category')
+        cyc = request.form.get('cycle')
+        apy = request.form.get('payee')
+        due = request.form.get('due')
+        image = request.form.get('image')
+        amt = request.form.get('amount')
+        if image == '':
+            image = 'None'
+        cur.execute('insert into expenses(u_id, c_id, s_id, pay_id, cyc_id, amount, payee) values({u_id},{c_id},{s_id},{pay_id},{cyc_id},{amount},{payee})'.format(u_id=u_id, c_id=category, s_id=sub_category, pay_id='cash', cyc_id=cyc,amount=amt, payee=apy))
+        
+        cur.execute('select * from expenses;')
+        # hm = cur.fetchall()
+        # cat_id = 'Hi'
+        # return str(hm)
+    else:   
+        return render_template('login.html')
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -68,7 +94,6 @@ def register():
         u_id = cur.fetchall()
         return render_template('dash.html',u_id=u_id)
     return render_template('register.html')
-
 
 
 @app.route('/home',methods=['GET','POST'])

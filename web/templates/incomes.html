@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block head%}
+<title>Sources of Income</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inc.css') }}" />
+{% endblock %} {% block body %}
+<h1 style="margin: 40px">Source of Income</h1>
+<h3 style="margin: 40px; font-weight: 300">Expense Manager</h3>
+<form action="{{url_for('add_inc')}}" method="post">
+  <select name="" id="" class="drop">
+    <option value="salary">Salary</option>
+    <option value="business">Busniess</option>
+    <option value="other">Other Sources</option>
+  </select>
+  <input type="text" name="uname" placeholder="Income" />
+  <input type="submit" value="Add Income" class="submit" />
+  <a href="{{url_for('login')}}">Login to view changes</a>
+</form>
+{%endblock %}

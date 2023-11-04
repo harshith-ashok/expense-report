@@ -1,15 +1,9 @@
 {% extends 'base.html' %} {% block head%}
 <title>Dashboard</title>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/dash.css') }}"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dash.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 {% endblock %} {% block body %}
-<h1 style="margin: 40px; text-transform: capitalize">Welcome, {{uname}}</h1>
+<h1 style="margin: 40px; text-transform: capitalize">Welcome, {{uname[0][0]}}</h1>
 <h3 style="margin: 40px; font-weight: 300; margin-top: -40px">
   Expense Manager
   <a href="{{url_for('login')}}">Logout</a>
@@ -28,13 +22,14 @@
       <th>Due</th>
       <th>Payed Date</th>
       <th style="width: 5%">Reciept</th>
-      <th style="width: 1%"></th>
+      <th style="width: 1%">Delete</th>
     </tr>
     <tr>
       {%for x in range(e_id|length)%}
       <td>{{data[i[x]][0]}}</td>
       <td>{{category[data[i[x]][2]][1]}}</td>
-      <td>{{sub_category[i[x]][2]}}</td>
+      {%set y = sub_category[i[x]][2]%}
+      <td>{{y}}</td>
       <td>{{source[x][1]}}</td>
       <td style="text-transform: capitalize">{{pay_type[x][1]}}</td>
       <td style="text-transform: capitalize">{{cyc[x][1]}}</td>
@@ -46,11 +41,123 @@
           View <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </button>
       </td>
-      <td>
+      <td style="text-align: center">
         <i class="fa-solid fa-trash-can" style="color: black; padding: 5px"></i>
       </td>
     </tr>
     {%endfor%}
   </table>
+
+  <div class="btns">
+    <form action="{{url_for('add_ent')}}" method="POST">
+      <a onclick="toggle_display()" style="cursor: pointer">Add Entry
+        <i class="fa-solid fa-caret-right icn-drop"></i>
+      </a>
+
+      <!-- Modal content -->
+      <div style="
+        padding: 20px;
+        border: solid gray;
+        border-width: 0.5px;
+        margin: 20px;
+        margin-left: -15px;
+        margin-right: -5px;
+        border-radius: 10px;
+      " class="add_entry">
+        <div>
+          <div class="optn">
+            <label for="category">Category - </label>
+            <select name="category" id="category">
+              {%set c = 0%} {% for j in category%}
+              <option value="{{j[0]}}">{{j[1]}}</option>
+              {%set c = j%} {%endfor%}
+            </select>
+          </div>
+          <div class="optn">
+            <label for="sub-category"> Sub Category - </label>
+
+            <input type="number" name="sub_category" id="sub_category" min="1" max="34" />
+            <i class="fa-solid fa-circle-info" id="myBtn"></i>
+          </div>
+          <div class="optn">
+            <label for="cycle">Cycle - </label>
+            <select name="cycle" id="cycle" style="text-transform: capitalize">
+              {% for i in cyc%}
+              <option value="{{i[0]}}">{{i[1]}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="optn">
+            <p>Payee -</p>
+            <input type="text" name="payee" id="payee" placeholder="BSNL, Shell, ACT, etc." />
+          </div>
+                    <div class="optn">
+            <p>Amount -</p>
+            <input type="text" name="amount" id="amount" placeholder="10000" />
+          </div>
+          <div class="optn">
+            <p>Due -</p>
+            <input type="date" id="due" name="due" />
+          </div>
+          <div class="optn">
+            <label for="image">Reciept - </label>
+            <input type="file" id="image" name="image" accept="image/*" />
+          </div>
+        </div>
+        <button type="submit">Add</button>
+    </form>
+      
+          
+  </div>
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div style="overflow-y: scroll; height: 500px">
+        <input type="text" name="" id="" placeholder="">
+        <table style="padding: 20px">
+          <tr>
+            <th style="width: 1%">Id</th>
+            <th style="width: 10%">Category</th>
+            <th>Sub Category</th>
+          </tr>
+          {% for k in sub_category%}
+          <tr>
+            <td>{{k[0]}}</td>
+            <td>{{category[k[1]-1][1]}}</td>
+            <td>{{k[2]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+    </div>
+    <script>
+      function toggle_display() {
+        el = document.querySelector(".add_entry");
+        btn = document.querySelector(".btn-top");
+        drop1 = document.querySelector(".icn-drop");
+        drop2 = document.querySelector(".icn-drop2");
+
+        if (el.style.visibility == "hidden") {
+          el.style.visibility = "visible";
+          drop1.style.visibility = "visible";
+          drop2.style.visibility = "hidden";
+          btn.style.backgroundColor = "coral";
+        } else {
+          el.style.visibility = "hidden";
+          drop2.style.visibility = "hidden";
+          btn.style.backgroundColor = "lightcoral";
+        }
+      }
+      var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("but");
+
+      // Get the <span> element that closes the modal
+
+    </script>
+  </div>
 </div>
 {%endblock %}
+</div>
