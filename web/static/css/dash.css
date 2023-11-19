@@ -1,114 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 a {
-    text-decoration: none;
-    margin: 10px;
+  text-decoration: none;
+  margin: 10px;
+  color: cornflowerblue;
 }
 
+ul {
+  font-family: "Josefin Sans";
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: cornflowerblue;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+  border-radius: 5px;
+}
+
+.active {
+  background-color: #04aa6d;
+}
+h1,
+h3 {
+  font-family: "Josefin Sans";
+  letter-spacing: 0px;
+  font-weight: bold;
+}
+
+p {
+  font-family: "Josefin Sans";
+}
 
 table {
-    font-family: 'Catrograph CF';
-    border-collapse: collapse;
-    width: 100%;
-    border: none;
+  font-family: "Josefin Sans";
+  border-collapse: collapse;
+  width: 100%;
+  border: solid;
+  border-width: 0.5px;
 }
 
 td,
 th {
-    text-align: left;
-    padding: 8px;
+  text-align: left;
+  padding: 8px;
+  border: dashed;
+  border-width: 0.5px;
 }
 
 tr:nth-child(even) {
-    background-color: rgba(128, 0, 0, 0.2);
-    border-radius: 10px;
+  background-color: lightblue;
+  border-radius: 10px;
 }
 
 .table-cont {
-    margin: 30px
+  margin: 30px;
 }
 
 .btns {
-    margin: 20px;
+  margin: 10px;
 }
 
-button, .btn-top {
-    font-size: 14px;
-    background-color: lightcoral;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+.add-ent {
+  padding: 20px;
+  border: solid lightblue;
+  border-width: 0.5px;
+  margin: 20px;
+  margin-left: -15px;
+  margin-right: -5px;
+  border-radius: 5px;
+  font-family: "Josefin Sans";
 }
 
-button,.btn-top:hover {
-    font-size: 14px;
-    background-color: coral;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor:pointer;
+button,
+.btn-top {
+  font-size: 14px;
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button,
+.btn-top:hover {
+  font-size: 14px;
+  background-color: lightblue;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    border-radius: 10px;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 10px;
 }
 
 /* The Close Button */
 .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .optn {
-    margin: 20px;
+  margin: 20px;
 }
 
 .add_entry {
-    visibility: visible;
+  visibility: visible;
 }
 
-select, input {
-    background-color: white;
-    border: solid #000;
-    border-width: 0.5px;
-    padding: 5px;
-    border-radius: 5px;
+select,
+input {
+  background-color: white;
+  border: solid lightblue;
+  border-width: 0.5px;
+  padding: 5px;
+  color: black;
+  border-radius: 5px;
+font-family: "Josefin Sans";
 }

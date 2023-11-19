@@ -11,6 +11,11 @@ cur = con.cursor()
 cur.execute('use v4')
 
 app = Flask(__name__)
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('misc/404.html')
+
 @app.route('/',methods=['GET','POST'])
 def root():
     return redirect(url_for('login'))
@@ -36,6 +41,14 @@ def login():
             x = []
             for i in range(len(e_id)):
                 x.append(i)
+            cur.execute("select inc_id from expenses where u_id='{u_id}'".format(u_id=u_id[0][0]))
+            ch_src = cur.fetchall()
+            cur.execute("select pay_id from expenses where u_id='{u_id}'".format(u_id=u_id[0][0]))
+            payt = cur.fetchall()
+            cur.execute("select cyc_id from expenses where u_id='{u_id}'".format(u_id=u_id[0][0]))
+            cyct = cur.fetchall()
+            cur.execute("select payee from expenses where u_id='{u_id}'".format(u_id=u_id[0][0]))
+            payeet = cur.fetchall()
             cur.execute("select * from category")
             category = cur.fetchall()
             cur.execute("select * from sub_category")
@@ -49,7 +62,8 @@ def login():
             cat_js =[]
             for i in category:
                 cat_js.append(i[1])
-            return render_template('dash.html',u_id=pass_to_check[0][0],data=df, category=category,category_js=json.dumps(cat_js),sub_category=sub_category, source=source, cyc=cyc, pay_type=pay_type,e_id=e_id,i=x,uname=uname_to_check)
+            return render_template('dash.html',u_id=pass_to_check[0][0],data=df, category=category,category_js=json.dumps(cat_js),sub_category=sub_category,ch_src=ch_src, source=source, cyc=cyc, pay_type=pay_type,e_id=e_id,i=x,payt=payt,cyct=cyct,payeet=payeet,uname=uname_to_check)
+            
         else:
             return render_template('misc/401.html')
 
@@ -57,29 +71,32 @@ def login():
 
 @app.route('/dash',methods=['GET','POST'])
 def dash(u_id):
-    cur.execute('select * from expenses where u_id={u_id}'.format(u_id=u_id))
+    cur.execute('select u_id from expenses where u_id={u_id}'.format(u_id=u_id))
     df = cur.fetchall()
     return render_template('dash.html',data=df)
 
 @app.route('/add-entry',methods=['GET','POST'])
 def add_ent():
     if request.method == 'POST':
-        u_id = request.args.get('u_id')
+        u_id = request.form.get('uuid')
         category = request.form.get('category')
         sub_category = request.form.get('sub_category')
         cyc = request.form.get('cycle')
+        inc_src = request.form.get('cycle')
+        method = request.form.get('method')
         apy = request.form.get('payee')
         due = request.form.get('due')
         image = request.form.get('image')
         amt = request.form.get('amount')
-        if image == '':
-            image = 'None'
-        cur.execute('insert into expenses(u_id, c_id, s_id, pay_id, cyc_id, amount, payee) values({u_id},{c_id},{s_id},{pay_id},{cyc_id},{amount},{payee})'.format(u_id=u_id, c_id=category, s_id=sub_category, pay_id='cash', cyc_id=cyc,amount=amt, payee=apy))
+        cur.execute('insert into expenses(u_id, c_id, s_id, pay_id, cyc_id, inc_id, amount, payee) values({u_id}, {c_id},{s_id}, {pay_id}, {cyc_id}, {inc_id},{amount},"{payee}")'.format(u_id=u_id, c_id=category, s_id=sub_category, pay_id=method, cyc_id=cyc,amount=amt, payee=apy, inc_id=inc_src))
+        # return str([cyc])
+        # con.commit()
+        # return str([u_id, category, sub_category, cyc, inc_src, method, apy, image, amt])
         
-        cur.execute('select * from expenses;')
+        #cur.execute('select * from expenses;')
         # hm = cur.fetchall()
         # cat_id = 'Hi'
-        # return str(hm)
+        # return render_template('misc/added.html')
     else:   
         return render_template('login.html')
 
