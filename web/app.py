@@ -88,10 +88,10 @@ def add_ent():
         due = request.form.get('due')
         image = request.form.get('image')
         amt = request.form.get('amount')
-        cur.execute('insert into expenses(u_id, c_id, s_id, pay_id, cyc_id, inc_id, amount, payee) values({u_id}, {c_id},{s_id}, {pay_id}, {cyc_id}, {inc_id},{amount},"{payee}")'.format(u_id=u_id, c_id=category, s_id=sub_category, pay_id=method, cyc_id=cyc,amount=amt, payee=apy, inc_id=inc_src))
+        # cur.execute('insert into expenses(u_id, c_id, s_id, pay_id, cyc_id, inc_id, amount, payee) values({u_id}, {c_id},{s_id}, {pay_id}, {cyc_id}, {inc_id},{amount},"{payee}")'.format(u_id=u_id, c_id=category, s_id=sub_category, pay_id=method, cyc_id=cyc,amount=amt, payee=apy, inc_id=inc_src))
         # return str([cyc])
         # con.commit()
-        # return str([u_id, category, sub_category, cyc, inc_src, method, apy, image, amt])
+        return str([u_id, category, sub_category, cyc, inc_src, method, apy, image, amt])
         
         #cur.execute('select * from expenses;')
         # hm = cur.fetchall()
