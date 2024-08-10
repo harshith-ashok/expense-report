@@ -4,7 +4,7 @@ import mysql.connector as sql
 # Random for id generator
 import random
 
-con = sql.connect(user='root', password='P@ssw0rd!12',host='localhost',auth_plugin='mysql_native_password')
+con = sql.connect(user='****', password='******',host='localhost',auth_plugin='mysql_native_password')
 
 cur = con.cursor()
 
