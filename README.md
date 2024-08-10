@@ -1,3 +1,6 @@
+
+# Simple Expense report project built with Flask for my final year at high school
+---
 Expense Manager is an online application where the user can login to maintain his expenses and incomes. The user should be able to 
 - Tracking expenses and incomes by week, month and year as well as by categories
 - Have Multiple accounts - Schedule the payments. 
