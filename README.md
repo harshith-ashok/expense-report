@@ -22,11 +22,22 @@ Some of the sample categories to be included
     - Concert    
     - Sports
 
-- Family o Child Care o Toys o Others
+- Family
+    - Child Care
+    - Toys
+    - Others
 
-- Food o Breakfast o Lunch o Dinner o Snacks o Groceries
+- Food
+      - Breakfast
+      - Lunch
+      - Dinner
+      - Snacks
+      - Groceries
 
-- Insurance o Auto o Health o Life
+- Insurance
+      - Auto
+      - Health
+      - Life
 
 - Tax
 o Property Tax o Vehicle Tax o Other
